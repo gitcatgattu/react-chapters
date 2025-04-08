@@ -5,4 +5,5 @@ const DisplayCounter = () => {
 
   return <p className="lead mb-4">Counter current value {counterVal}.</p>;
 };
+
 export default DisplayCounter;
