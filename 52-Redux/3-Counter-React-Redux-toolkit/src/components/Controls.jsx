@@ -1,30 +1,32 @@
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
-import { counterActions } from "../store";
+import { counterActions } from "../store/counter";
+import { privacyActions } from "../store/privacy";
 
 const Controls = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const inputElement = useRef();
   const handleIncrement = () => {
-    console.log('increment called',counterActions.decrement
-  )
+    dispatch(counterActions.increment());
   };
   const handleDecrement = () => {
-counterActions.decrement()     
+    dispatch(counterActions.decrement());
   };
   const handleAdd = () => {
-    dispatch({ type: "ADD", payload: { num: inputElement.current.value } });
+    
+    dispatch(counterActions.add(inputElement.current.value ))
+
+
+
     inputElement.current.value = "";
   };
   const handleSubtract = () => {
-    dispatch({
-      type: "SUBTRACT",
-      payload: { num: inputElement.current.value },
-    });
+    dispatch(counterActions.subtract(inputElement.current.value ))
+
     inputElement.current.value = "";
   };
   const handlePrivacyToggle = () => {
-    dispatch({ type: "PRIVACY_TOGGLE" });
+    dispatch(privacyActions.toggle() );
   };
   return (
     <>
@@ -43,7 +45,11 @@ counterActions.decrement()
         >
           -1
         </button>
-        <button type="button"  className="btn btn-warning" onClick={handlePrivacyToggle}>
+        <button
+          type="button"
+          className="btn btn-warning"
+          onClick={handlePrivacyToggle}
+        >
           Privacy Toggle
         </button>
       </div>
